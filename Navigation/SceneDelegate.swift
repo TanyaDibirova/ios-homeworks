@@ -4,7 +4,6 @@
 //
 //  Created by MacBook on 03.02.2023.
 //
-
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -19,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let firstVC = ViewController()
       
-        let secondVC = FeedViewController()
+        let secondVC = ProfileViewController()
         secondVC.title = "Профиль"
         
     

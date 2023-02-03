@@ -15,6 +15,8 @@
 		FA487E2B298D3D0E005E6FDF /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E2A298D3D0E005E6FDF /* FeedViewController.swift */; };
 		FA487E2D298D3D92005E6FDF /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E2C298D3D92005E6FDF /* PostViewController.swift */; };
 		FA487E2F298D3E1A005E6FDF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E2E298D3E1A005E6FDF /* InfoViewController.swift */; };
+		FA487E38298DB4D4005E6FDF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E37298DB4D4005E6FDF /* ProfileViewController.swift */; };
+		FA487E3A298DB565005E6FDF /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E39298DB565005E6FDF /* ProfileHeaderView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		FA487E2A298D3D0E005E6FDF /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		FA487E2C298D3D92005E6FDF /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
 		FA487E2E298D3E1A005E6FDF /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		FA487E37298DB4D4005E6FDF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		FA487E39298DB565005E6FDF /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,7 @@
 		FA487E0A298D0CD0005E6FDF = {
 			isa = PBXGroup;
 			children = (
+				FA487E36298DB47D005E6FDF /* Profil */,
 				FA487E15298D0CD0005E6FDF /* Navigation */,
 				FA487E14298D0CD0005E6FDF /* Products */,
 			);
@@ -71,6 +76,15 @@
 				FA487E24298D0CD3005E6FDF /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		FA487E36298DB47D005E6FDF /* Profil */ = {
+			isa = PBXGroup;
+			children = (
+				FA487E37298DB4D4005E6FDF /* ProfileViewController.swift */,
+				FA487E39298DB565005E6FDF /* ProfileHeaderView.swift */,
+			);
+			path = Profil;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,8 +161,10 @@
 				FA487E17298D0CD0005E6FDF /* AppDelegate.swift in Sources */,
 				FA487E2B298D3D0E005E6FDF /* FeedViewController.swift in Sources */,
 				FA487E19298D0CD0005E6FDF /* SceneDelegate.swift in Sources */,
+				FA487E38298DB4D4005E6FDF /* ProfileViewController.swift in Sources */,
 				FA487E2F298D3E1A005E6FDF /* InfoViewController.swift in Sources */,
 				FA487E2D298D3D92005E6FDF /* PostViewController.swift in Sources */,
+				FA487E3A298DB565005E6FDF /* ProfileHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
