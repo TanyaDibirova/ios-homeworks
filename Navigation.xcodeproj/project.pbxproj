@@ -38,6 +38,7 @@
 		FA487E0A298D0CD0005E6FDF = {
 			isa = PBXGroup;
 			children = (
+				FA487E30298D42D5005E6FDF /* Profile */,
 				FA487E15298D0CD0005E6FDF /* Navigation */,
 				FA487E14298D0CD0005E6FDF /* Products */,
 			);
@@ -62,6 +63,13 @@
 				FA487E24298D0CD3005E6FDF /* Info.plist */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		FA487E30298D42D5005E6FDF /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
