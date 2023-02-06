@@ -48,7 +48,6 @@
 		FA487E0A298D0CD0005E6FDF = {
 			isa = PBXGroup;
 			children = (
-				FA487E36298DB47D005E6FDF /* Profil */,
 				FA487E15298D0CD0005E6FDF /* Navigation */,
 				FA487E14298D0CD0005E6FDF /* Products */,
 			);
@@ -65,6 +64,7 @@
 		FA487E15298D0CD0005E6FDF /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				FA487E36298DB47D005E6FDF /* Profil */,
 				FA487E16298D0CD0005E6FDF /* AppDelegate.swift */,
 				FA487E18298D0CD0005E6FDF /* SceneDelegate.swift */,
 				FA487E1A298D0CD0005E6FDF /* ViewController.swift */,
