@@ -80,11 +80,12 @@ class ProfileHeaderView: UIView {
             self.waitingLabel.bottomAnchor.constraint(equalTo: editButton.topAnchor, constant: -52),
             self.waitingLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 132),
      
-            self.editButton.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor),
-            self.editButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            self.editButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
-            self.editButton.heightAnchor.constraint(equalToConstant: 50)
-    
+            self.editButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16),
+            self.editButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
+            self.editButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            self.editButton.heightAnchor.constraint(equalToConstant: 50),
+            self.editButton.topAnchor.constraint(equalTo: maImageView.bottomAnchor, constant: 20)
+            
         ])
         
     }
