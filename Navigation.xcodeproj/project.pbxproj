@@ -17,6 +17,7 @@
 		FA487E2F298D3E1A005E6FDF /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E2E298D3E1A005E6FDF /* InfoViewController.swift */; };
 		FA487E38298DB4D4005E6FDF /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E37298DB4D4005E6FDF /* ProfileViewController.swift */; };
 		FA487E3A298DB565005E6FDF /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E39298DB565005E6FDF /* ProfileHeaderView.swift */; };
+		FA487E3C299839F0005E6FDF /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E3B299839EF005E6FDF /* LogInViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		FA487E2E298D3E1A005E6FDF /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		FA487E37298DB4D4005E6FDF /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FA487E39298DB565005E6FDF /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		FA487E3B299839EF005E6FDF /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			children = (
 				FA487E37298DB4D4005E6FDF /* ProfileViewController.swift */,
 				FA487E39298DB565005E6FDF /* ProfileHeaderView.swift */,
+				FA487E3B299839EF005E6FDF /* LogInViewController.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -159,6 +162,7 @@
 			files = (
 				FA487E1B298D0CD0005E6FDF /* ViewController.swift in Sources */,
 				FA487E17298D0CD0005E6FDF /* AppDelegate.swift in Sources */,
+				FA487E3C299839F0005E6FDF /* LogInViewController.swift in Sources */,
 				FA487E2B298D3D0E005E6FDF /* FeedViewController.swift in Sources */,
 				FA487E19298D0CD0005E6FDF /* SceneDelegate.swift in Sources */,
 				FA487E38298DB4D4005E6FDF /* ProfileViewController.swift in Sources */,

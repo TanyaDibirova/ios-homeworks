@@ -6,6 +6,7 @@
 //
 import UIKit
 
+
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -16,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: scene)
         
-        let firstVC = ViewController()
+        let firstVC = LogInViewController()
       
         let secondVC = ProfileViewController()
         secondVC.title = "Профиль"
