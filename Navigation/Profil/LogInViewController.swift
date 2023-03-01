@@ -31,8 +31,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var textField: UITextField = { [unowned self] in
         let text = UITextField()
-        text.translatesAutoresizingMaskIntoConstraints = false
-        
+    //    text.translatesAutoresizingMaskIntoConstraints = false
+        let spacerView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 10))
+        text.leftViewMode = .always
+        text.leftView = spacerView
         text.placeholder = "Email of phone"
         text.font = UIFont.systemFont(ofSize: 16)
         text.autocorrectionType = UITextAutocorrectionType.no
@@ -46,8 +48,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var passField: UITextField = { [unowned self] in
         let passTF = UITextField()
-        passTF.translatesAutoresizingMaskIntoConstraints = false
-        
+    //    passTF.translatesAutoresizingMaskIntoConstraints = false
+        let spacerView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 10))
+        passTF.leftViewMode = .always
+        passTF.leftView = spacerView
         passTF.placeholder = "Password"
         passTF.font = UIFont.systemFont(ofSize: 16)
         passTF.autocorrectionType = UITextAutocorrectionType.no
@@ -60,10 +64,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return passTF
     }()
     
-    private lazy var containerView: UIView = {
-        let v = UIView()
+    private lazy var containerView: UIStackView  = { [unowned self] in
+        let v = UIStackView()
         
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.axis = .vertical
         v.layer.cornerRadius = 10
         v.layer.borderWidth = 1
         v.layer.borderColor = UIColor.lightGray.cgColor
@@ -72,14 +77,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return v
 
     }()
-    
+
     private lazy var separatorView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .lightGray
         return v
     }()
-    
     
     private lazy var editButton: UIButton = {
         let button = UIButton()
@@ -145,47 +149,29 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private func addSubviews() {
         imageView.image = logo
         
-        containerView.addSubview(textField)
-        containerView.addSubview(separatorView)
-        containerView.addSubview(passField)
+        containerView.addArrangedSubview(self.textField)
+        containerView.addArrangedSubview(separatorView)
+        containerView.addArrangedSubview(self.passField)
+        separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
+        passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
+    
+
         
-        setupConstrainsForContainerView()
+   //     setupConstrainsForContainerView()
         
         
-        contentView.addSubview(imageView)
-        contentView.addSubview(editButton)
-        contentView.addSubview(containerView)
+        view.addSubview(imageView)
+        view.addSubview(editButton)
+        view.addSubview(containerView)
+    
         
         scollView.addSubview(contentView)
         view.addSubview(scollView)
         
     }
     
-    
-    private func setupConstrainsForContainerView() {
-        
-        NSLayoutConstraint.activate([
-         textField.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 0),
-           textField.leadingAnchor.constraint(equalTo:containerView.leadingAnchor, constant: 12),
-           textField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
-            textField.heightAnchor.constraint(equalToConstant: 49.5)
-       ])
-        
-        NSLayoutConstraint.activate([
-            separatorView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 0),
-            separatorView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 0),
-            separatorView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 0),
-            separatorView.heightAnchor.constraint(equalToConstant: 1)
-        ])
-        
-        NSLayoutConstraint.activate([
-            passField.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: 0),
-            passField.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 12),
-            passField.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -12),
-            passField.heightAnchor.constraint(equalToConstant: 49.5)
-        ])
-    }
-    
+
     private func setupConstrains() {
      //   let safeAreaGuide = view.safeAreaLayoutGuide
         
@@ -193,34 +179,25 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             imageView.topAnchor.constraint(equalTo:contentView.topAnchor,constant: 120),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 100),
-            imageView.widthAnchor.constraint(equalToConstant: 100)
+            imageView.widthAnchor.constraint(equalToConstant: 100),
     
-        ])
-        
-        NSLayoutConstraint.activate([
+    
             containerView.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 120),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            containerView.heightAnchor.constraint(equalToConstant: 100)
-        ])
-
-       NSLayoutConstraint.activate([
+            containerView.heightAnchor.constraint(equalToConstant: 100),
+            
         scollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         scollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         scollView.topAnchor.constraint(equalTo: view.topAnchor),
-        scollView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        scollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
 
-        NSLayoutConstraint.activate([
             editButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             editButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             editButton.topAnchor.constraint(equalTo: containerView.bottomAnchor,constant: 16),
             editButton.heightAnchor.constraint(equalToConstant: 50),
-            editButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
-        ])
- 
+            editButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
-        NSLayoutConstraint.activate([
             contentView.leadingAnchor.constraint(equalTo: scollView.leadingAnchor),
             contentView.widthAnchor.constraint(equalTo: scollView.widthAnchor),
             contentView.trailingAnchor.constraint(equalTo: scollView.trailingAnchor),

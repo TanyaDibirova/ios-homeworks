@@ -50,8 +50,17 @@ class ProfileHeaderView: UIView {
     }()
 
     
+    
+    convenience init(title: String) {
+        self.init(frame: .zero)
+        
+        catLabel.text = title
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+    
         self.setupSelf()
     }
     
