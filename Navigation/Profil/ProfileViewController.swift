@@ -65,7 +65,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     private func setupView() {
         view.backgroundColor = .black
-        navigationItem.title = "Нетология"
+        navigationItem.title = ""
         navigationController?.navigationBar.prefersLargeTitles = false
 
 }

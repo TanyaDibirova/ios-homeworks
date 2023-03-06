@@ -86,7 +86,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private lazy var editButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton(type: .system)
        button.translatesAutoresizingMaskIntoConstraints = false
        button.setTitle("Log in", for: .normal)
        button.setTitleColor(.white, for: .normal)
@@ -109,7 +109,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         addSubviews()
         setupConstrains()
         navigationController?.navigationBar.isHidden = true
-    }
+
+       view.addSubview(imageView)
+       view.addSubview(editButton)
+       view.addSubview(containerView)
+        scollView.addSubview(contentView)
+        
+        }
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
@@ -156,22 +162,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
         passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
     
-
         
-   //     setupConstrainsForContainerView()
-        
-        
-        view.addSubview(imageView)
+       view.addSubview(imageView)
         view.addSubview(editButton)
         view.addSubview(containerView)
     
-        
         scollView.addSubview(contentView)
         view.addSubview(scollView)
         
     }
     
-
     private func setupConstrains() {
      //   let safeAreaGuide = view.safeAreaLayoutGuide
         
@@ -230,7 +230,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let profileView = ProfileViewController()
 
         self.navigationController?.pushViewController(profileView, animated: true)
+    
     }
+    
 
     
 
@@ -250,7 +252,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
  }
 
 }
-
     /*
     // MARK: - Navigation
 
