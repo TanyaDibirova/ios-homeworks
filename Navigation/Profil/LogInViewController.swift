@@ -109,6 +109,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         addSubviews()
         setupConstrains()
         navigationController?.navigationBar.isHidden = true
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,16 +160,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
 
         
-   //     setupConstrainsForContainerView()
+     // setupConstrainsForContainerView()
         
         
         view.addSubview(imageView)
-        view.addSubview(editButton)
+
         view.addSubview(containerView)
     
-        
-        scollView.addSubview(contentView)
-        view.addSubview(scollView)
+       view.addSubview(scollView)
+       scollView.addSubview(contentView)
+        view.addSubview(editButton)
         
     }
     
@@ -180,9 +182,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 100),
             imageView.widthAnchor.constraint(equalToConstant: 100),
+           
+        
     
     
-            containerView.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 120),
+    
+            containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 120),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             containerView.heightAnchor.constraint(equalToConstant: 100),

@@ -40,14 +40,30 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         _ tableView: UITableView,
         cellForRowAt indexPath: IndexPath
     ) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.base.rawValue, for: indexPath
+        guard let cellImages = tableView.dequeueReusableCell(withIdentifier: CellReuseID.custom.rawValue, for: indexPath) as? PhotosTableViewCell else {
+            print("could not dequeueReusableCell - cellImages")
+            return UITableViewCell()
+        }
+        guard let cellPost = tableView.dequeueReusableCell(withIdentifier: CellReuseID.base.rawValue, for: indexPath
         ) as? PostTableViewCell else {
             fatalError("could not dequeueReusableCell")
         }
-        cell.update(menu[indexPath.row])
-     //   cell.configure(post: menu[indexPath.row])
+        if indexPath.row == 0 {
+            cellImages.configure(photos: Fhotos.make())
+            return cellImages
+        } else {
+            cellPost.update(menu[indexPath.row])
+            return cellPost
+        }
+           /*
+       guard let cell = tableView.dequeueReusableCell(withIdentifier: CellReuseID.base.rawValue, for: indexPath
+        ) as? PostTableViewCell else {
+            fatalError("could not dequeueReusableCell")
+        }
+     cell.update(menu[indexPath.row])
+       cell.configure(post: menu[indexPath.row])
         return cell
+    */
     }
     
     override func viewDidLoad() {
@@ -98,11 +114,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             PostTableViewCell.self,
                    forCellReuseIdentifier: CellReuseID.base.rawValue
                )
-               
-        
-        
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: CellReuseID.custom.rawValue)
+       
+       
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.row == 0 {
+            navigationController?.pushViewController(PhotosViewController(), animated: true)
+        }
     }
 }
 
