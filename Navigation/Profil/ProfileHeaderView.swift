@@ -2,18 +2,38 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    private lazy var maImageView: UIImageView = {
+    private var originFrame: CGRect = .zero
+    
+    lazy var someView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .white
+        return v
+    }()
+    
+    lazy var someButton: UIButton = {
+        let b = UIButton()
+        b.setBackgroundImage(UIImage(named: "close"), for: .normal)
+        b.addTarget(self, action: #selector(reverseAnimation), for: .touchUpInside)
+        return b
+    }()
+    
+    lazy var maImageView: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.layer.cornerRadius = 50
         image.clipsToBounds = true
         image.layer.borderWidth = 3
         image.layer.borderColor = UIColor.white.cgColor
+        
+        let tapImage = UITapGestureRecognizer(
+        target: self,
+        action: #selector(didTapImage)
+        )
+        image.addGestureRecognizer(tapImage)
         return image
     }()
-    
     let cat = UIImage(named: "cat")
-    
+    var widthcCon: NSLayoutConstraint!
     private lazy var catLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -64,6 +84,7 @@ class ProfileHeaderView: UIView {
         self.setupSelf()
     }
     
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -71,46 +92,125 @@ class ProfileHeaderView: UIView {
     
     private func setupSelf() {
         maImageView.image = cat
-        self.addSubview(self.maImageView)
+        maImageView.isUserInteractionEnabled = true
+
+        widthcCon = self.maImageView.widthAnchor.constraint(equalToConstant: 100)
+
         self.addSubview(self.catLabel)
         self.addSubview(self.waitingLabel)
         self.addSubview(self.editButton)
+        self.addSubview(self.maImageView)
         
         NSLayoutConstraint.activate([
            
             self.maImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
             self.maImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
-            self.maImageView.widthAnchor.constraint(equalToConstant: 100),
+            widthcCon,
             self.maImageView.heightAnchor.constraint(equalToConstant: 100),
         
             self.catLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
             self.catLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 132),
         
+            self.waitingLabel.topAnchor.constraint(equalTo: catLabel.bottomAnchor, constant: 20),
             self.waitingLabel.bottomAnchor.constraint(equalTo: editButton.topAnchor, constant: -52),
             self.waitingLabel.leadingAnchor.constraint(equalTo: leadingAnchor,constant: 132),
+            self.waitingLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
      
             self.editButton.bottomAnchor.constraint(equalTo: bottomAnchor,constant: -16),
             self.editButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16),
             self.editButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            self.editButton.heightAnchor.constraint(equalToConstant: 50),
-            self.editButton.topAnchor.constraint(equalTo: maImageView.bottomAnchor, constant: 20)
+            self.editButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])
         
     }
-                                
+    
+    func animateSize(width: CGFloat, height: CGFloat) {
+        CATransaction.begin()
+        let sizeAnimation = CABasicAnimation(keyPath: "bounds.size")
+        sizeAnimation.duration = 2
+        sizeAnimation.isRemovedOnCompletion = false
+        sizeAnimation.toValue = CGSize(width: width, height: width)
+        maImageView.layer.add(sizeAnimation, forKey: "bounds.size")
+        maImageView.layer.bounds.size = CGSize(width: width,
+                                               height: width)
+        CATransaction.commit()
+    }
+    
+    func imageAnimationExample() {
+        originFrame = maImageView.frame
+        let centerOrigin = superview!.center//.center
+        maImageView.translatesAutoresizingMaskIntoConstraints = true
+        UIView.animate(withDuration: 0.5) {
+            self.maImageView.layer.cornerRadius = 0
+            self.maImageView.center = CGPoint(
+                x: centerOrigin.x,
+                y: centerOrigin.y
+            )
+            self.animateSize(width: self.superview!.frame.width,
+                             height: self.superview!.frame.width)
+        }
+        addSomeView()
+        UIView.animate(withDuration: 0.5) {
+            self.someView.alpha = 1
+        }
+        addSomeButton()
+        UIView.animate(withDuration: 0.3, delay: 0.5) {
+            self.someButton.alpha = 1
+        }
+    }
+    
+    func addSomeView() {
+        someView.alpha = 0
+        someView.frame = CGRect(x: maImageView.frame.origin.x,
+                                y: maImageView.frame.origin.y + maImageView.frame.height + 40,
+                                width: maImageView.frame.width,
+                                height: 50)
+        addSubview(someView)
+    }
+    
+    func addSomeButton() {
+        someButton.alpha = 0
+        someButton.frame = CGRect(x: superview!.frame.width - 80,
+                                  y: 80,
+                                  width: 50,
+                                  height: 50)
+        addSubview(someButton)
+    }
     
     @objc func pressed() {
         print("Waiting for something...")
     }
     
+    @objc private func didTapImage() {
+        imageAnimationExample()
+    }
+    
+    @objc private func reverseAnimation() {
+        UIView.animate(withDuration: 0.3) {
+            self.someButton.alpha = 0
+        } completion: { finished in
+            if finished {
+                self.someButton.removeFromSuperview()
+            }
+        }
+        
+        UIView.animate(withDuration: 0.5, delay: 0.3) {
+            self.maImageView.frame = self.originFrame
+            self.maImageView.layer.cornerRadius = self.originFrame.width / 2
+            self.someView.alpha = 0
+            self.animateSize(width: self.originFrame.width, height: self.originFrame.width)
+        } completion: { finished in
+            if finished {
+                self.someView.removeFromSuperview()
+                self.maImageView.translatesAutoresizingMaskIntoConstraints = false
+            }
+        }
+        
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
     }
 }
-
-
-
-
 

@@ -7,11 +7,12 @@
 
 import UIKit
 
+
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
 
     fileprivate let menu = Menu.make()
-    
+    let headerView = ProfileHeaderView()
     private lazy var tableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false
@@ -79,6 +80,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
 }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+//        headerView.imageAnimationExample()
+        
+        
+    }
+    
     private func setupView() {
         view.backgroundColor = .black
         navigationItem.title = "Нетология"
@@ -102,10 +110,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         ])
     }
     
+    
     private func tuneTableView() {
         tableView.estimatedRowHeight = 44.0
         
-        let headerView = ProfileHeaderView()
+        
         tableView.setAndLayout(headerView: headerView)
         tableView.tableFooterView = UIView()
         
@@ -127,7 +136,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
 }
-
 
 
 

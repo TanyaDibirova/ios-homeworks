@@ -153,22 +153,23 @@ extension PhotosViewController: UICollectionViewDataSource {
         ) {
             cell.contentView.backgroundColor = .yellow
         }
-        
-        func collectionView(
-            _ collectionView: UICollectionView,
-            didSelectItemAt indexPath: IndexPath
-        ) {
-            print("Did select cell at \(indexPath.row)")
+ /*
+       func collectionView(
+           _ collectionView: UICollectionView,
+          didSelectItemAt indexPath: IndexPath
+       ) {
+            print("Did select cell at (indexPath.row)")
             
             let fhoto = photo[indexPath.row]
             
-            let viewController = UIViewController()
-            viewController.title = fhoto.imageName
+           let viewController = //UIViewController()
+            viewController.title = //fhoto.imageName
             viewController.view.backgroundColor = .blue
             
-            navigationController?.pushViewController(viewController, animated: true)
-        }
-}
+            navigationController?//.pushViewController(viewController, animated: true)
+  */
+    }
+
     
 
     
