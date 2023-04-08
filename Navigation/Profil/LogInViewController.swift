@@ -115,7 +115,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
-          
+        
+        #if DEBUG
+        view.backgroundColor = .red
+        #else
+        view.backgroundColor = .blue
+        #endif
+        
           setupKeyboardObservers()
       }
       

@@ -2,19 +2,22 @@
 
 import UIKit
 
-struct Menu {
+public struct Menu {
     
-    let author: String
-    let description: String
-    let mage: String
-    let likes: Int
-    let views: Int
+   public let author: String
+   public let description: String
+   public let mage: String
+   public let likes: Int
+   public let views: Int
     
 }
-
+  
 extension Menu {
+
     
-    static func make() -> [Menu] {
+   public static func make() -> [Menu] {
+       
+
         [
             Menu(
                 author: "И.И.Шишкина и К.А.Савицкого",
@@ -46,3 +49,4 @@ extension Menu {
         ]
     }
 }
+
