@@ -4,7 +4,7 @@
 //
 //  Created by MacBook on 09.03.2023.
 //
-
+import iOSIntPackage
 import UIKit
     
 class PhotosTableViewCell: UITableViewCell {
@@ -61,10 +61,31 @@ class PhotosTableViewCell: UITableViewCell {
     }
     func configure(photos: [Fhotos]) {
         guard photos.count > 3 else  { return }
-        image1.image = UIImage(named: photos[0].imageName)
-        image2.image = UIImage(named: photos[1].imageName)
-        image3.image = UIImage(named: photos[2].imageName)
-        image4.image = UIImage(named: photos[3].imageName)
+        
+        let ip = ImageProcessor()
+        let imageNamed1 = UIImage(named: photos[0].imageName)
+        ip.processImage(sourceImage: imageNamed1!, filter: .colorInvert, completion: { im in image1.image = im
+        })
+        
+    
+        let imageNamed2 = UIImage(named: photos[1].imageName)
+        ip.processImage(sourceImage: imageNamed2!, filter: .posterize, completion: { im in image2.image = im
+        })
+        
+     
+        let imageNamed3 = UIImage(named: photos[2].imageName)
+        ip.processImage(sourceImage: imageNamed3!, filter: .tonal, completion: { im in image3.image = im
+        })
+        
+        
+        let imageNamed4 = UIImage(named: photos[3].imageName)
+        ip.processImage(sourceImage: imageNamed4!, filter: .fade, completion: { im in image4.image = im
+        })
+        
+   //     image1.image = UIImage(named: photos[0].imageName)
+    //    image2.image = UIImage(named: photos[1].imageName)
+    //    image3.image = UIImage(named: photos[2].imageName)
+    //    image4.image = UIImage(named: photos[3].imageName)
     }
         
         

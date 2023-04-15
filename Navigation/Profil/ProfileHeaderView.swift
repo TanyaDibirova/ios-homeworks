@@ -1,3 +1,5 @@
+
+import SnapKit
 import UIKit
 
 class ProfileHeaderView: UIView {
@@ -95,12 +97,37 @@ class ProfileHeaderView: UIView {
         maImageView.isUserInteractionEnabled = true
 
         widthcCon = self.maImageView.widthAnchor.constraint(equalToConstant: 100)
-
-        self.addSubview(self.catLabel)
-        self.addSubview(self.waitingLabel)
-        self.addSubview(self.editButton)
-        self.addSubview(self.maImageView)
+                addSubview(catLabel)
+                self.addSubview(self.waitingLabel)
+                self.addSubview(self.editButton)
+                self.addSubview(self.maImageView)
+            
+                
+                maImageView.snp.makeConstraints { (make) -> Void in
+                    make.top.equalTo(self).offset(22)
+                    make.left.equalTo(self).offset(16)
+                    make.size.equalTo(CGSize(width: 100, height: 100))
+                }
+            
+                catLabel.snp.makeConstraints { (make) -> Void in
+                    make.left.equalTo(self).offset(132)
+                    make.top.equalTo(self).offset(20)
+                }
+                waitingLabel.snp.makeConstraints {
+                    $0.top.equalTo(catLabel).offset(20)
+                    $0.bottom.equalTo(editButton).offset(-52)
+                    $0.left.equalTo(self).offset(132)
+                    $0.trailing.equalTo(self).offset(-16)
+                }
+                editButton.snp.makeConstraints {
+                    $0.top.equalTo(maImageView.snp.bottom).offset(16)
+                    $0.bottom.equalTo(self).offset(-16)
+                    $0.left.equalTo(self).offset(16)
+                    $0.trailing.equalTo(self).offset(-16)
+                    $0.size.equalTo(CGSize(width: 100, height: 50))
+                }
         
+  /*
         NSLayoutConstraint.activate([
            
             self.maImageView.topAnchor.constraint(equalTo: topAnchor, constant: 16),
@@ -122,7 +149,8 @@ class ProfileHeaderView: UIView {
             self.editButton.heightAnchor.constraint(equalToConstant: 50)
             
         ])
-        
+  
+   */
     }
     
     func animateSize(width: CGFloat, height: CGFloat) {
