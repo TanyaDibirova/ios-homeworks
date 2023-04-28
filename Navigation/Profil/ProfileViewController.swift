@@ -36,6 +36,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         menu.count
     }
     
+    private var user: UserService?
+    
+    init(user: UserService) {
+ 
+        self.user = user
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func tableView(
         _ tableView: UITableView,
@@ -71,10 +82,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         
         view.addSubview(tableView)
-        
         setupView()
         addSubviews()
-        
+        headerView.setupView(user: user as! User)
         setupConstraints()
         tuneTableView()
         

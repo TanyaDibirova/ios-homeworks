@@ -1,5 +1,4 @@
 
-
 import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
@@ -99,10 +98,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         button.layer.shadowRadius = 4.0
        return button
     }()
+    var curentUserInit: UserService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
+// self.curentUserInit = CurrentUserService()
+
         view.backgroundColor = .white
         
         setupView()
@@ -113,14 +115,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
           super.viewWillAppear(animated)
         
         #if DEBUG
-        view.backgroundColor = .red
+        curentUserInit = TestUserService().testUser
         #else
-        view.backgroundColor = .blue
+        curentUserInit = CurrentUserService().user
         #endif
+        
+        view.backgroundColor = .white
         
           setupKeyboardObservers()
       }
@@ -152,8 +158,28 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         navigationItem.title = "ScrollView examle"
         navigationController?.navigationBar.prefersLargeTitles = false
     }
+ 
     
     
+    private func addSubviews() {
+            imageView.image = logo
+            
+            containerView.addArrangedSubview(textField)
+            containerView.addArrangedSubview(separatorView)
+            containerView.addArrangedSubview(passField)
+            separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+            textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
+            passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
+         
+            // setupConstrainsForContainerView()
+            contentView.addSubview(imageView)
+            contentView.addSubview(containerView)
+            contentView.addSubview(editButton)
+            scollView.addSubview(contentView)
+            view.addSubview(scollView)
+        }
+    
+    /*
     private func addSubviews() {
         imageView.image = logo
         
@@ -163,9 +189,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
         passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
-    
-
-        
+            
      // setupConstrainsForContainerView()
         
         
@@ -178,6 +202,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         view.addSubview(editButton)
         
     }
+    */
     
 
     private func setupConstrains() {
@@ -236,15 +261,28 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                 object: nil
             )
     }
-    
+
     @objc func pressed() {
-        let profileView = ProfileViewController()
-
-        self.navigationController?.pushViewController(profileView, animated: true)
-    }
-
     
 
+        guard let pass = textField.text else {return}
+        guard  let user = curentUserInit?.userService(login: pass) else {
+            
+            print("user not found in login vc")
+            let aleart = UIAlertController(title: "Login Wrong", message: "You entered wrong login. Please change it", preferredStyle: .alert)
+                    let action  = UIAlertAction(title: "Change", style: .destructive)
+                    aleart.addAction(action)
+            present(aleart, animated: true)
+            return
+        }
+ 
+        if user != nil {
+            let profileView = ProfileViewController(user: user)
+ self.navigationController?.pushViewController(profileView, animated: true)
+            print("OLA USER ")
+        }
+
+  }
 
  private func removeKeyboardObservers() {
      let notificationCenter = NotificationCenter.default
@@ -271,4 +309,5 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+
 

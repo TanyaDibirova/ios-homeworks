@@ -34,7 +34,7 @@ class ProfileHeaderView: UIView {
     }()
     let cat = UIImage(named: "cat")
     var widthcCon: NSLayoutConstraint!
-    private lazy var catLabel: UILabel = {
+     var catLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Hipster Cat"
@@ -168,6 +168,13 @@ class ProfileHeaderView: UIView {
                                 height: 50)
         addSubview(someView)
     }
+    
+    func setupView(user: User?) {
+            maImageView.image = user?.avatar
+            catLabel.text = user?.fullName
+            waitingLabel.text = user?.status
+        }
+    
     
     func addSomeButton() {
         someButton.alpha = 0

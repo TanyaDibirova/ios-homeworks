@@ -4,6 +4,7 @@
 //
 //  Created by MacBook on 03.02.2023.
 //
+//
 import UIKit
 
 
@@ -20,8 +21,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let firstVC = LogInViewController()
        // firstVC.view.backgroundColor = .gray
-      
-        let secondVC = ProfileViewController()
+       
+        let secondVC = FeedViewController()
+//        let secondVC = ProfileViewController(user: user)
         secondVC.title = "Профиль"
         
     
@@ -45,7 +47,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
 }
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
