@@ -10,7 +10,6 @@ import StorageService
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
-
     fileprivate let menu = Menu.make()
     let headerView = ProfileHeaderView()
     private lazy var tableView: UITableView = {
@@ -36,9 +35,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         menu.count
     }
     
-    private var user: UserService?
+    private var user: User?
     
-    init(user: UserService) {
+    init(user: User) {
  
         self.user = user
         super.init(nibName: nil, bundle: nil)
@@ -89,19 +88,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tuneTableView()
         
 }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        headerView.imageAnimationExample()
-        
-        
     }
     
     private func setupView() {
         view.backgroundColor = .black
         navigationItem.title = "Нетология"
         navigationController?.navigationBar.prefersLargeTitles = false
-
 }
     
     private func addSubviews() {
@@ -119,7 +115,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             
         ])
     }
-    
     
     private func tuneTableView() {
         tableView.estimatedRowHeight = 44.0

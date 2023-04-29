@@ -10,7 +10,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         scrollVieww.translatesAutoresizingMaskIntoConstraints = false
         return scrollVieww
     }()
-
+    
     private lazy var contentView: UIView = {
         let contentVieww = UIView()
         
@@ -26,11 +26,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }()
     let logo  = UIImage(named: "logo")
     
-    
-    
     private lazy var textField: UITextField = { [unowned self] in
         let text = UITextField()
-    //    text.translatesAutoresizingMaskIntoConstraints = false
+        //    text.translatesAutoresizingMaskIntoConstraints = false
         let spacerView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 10))
         text.leftViewMode = .always
         text.leftView = spacerView
@@ -47,7 +45,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var passField: UITextField = { [unowned self] in
         let passTF = UITextField()
-    //    passTF.translatesAutoresizingMaskIntoConstraints = false
+        //    passTF.translatesAutoresizingMaskIntoConstraints = false
         let spacerView = UIView(frame:CGRect(x: 0, y: 0, width: 10, height: 10))
         passTF.leftViewMode = .always
         passTF.leftView = spacerView
@@ -74,9 +72,9 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         v.backgroundColor = UIColor(red: 242/255, green: 242/255, blue: 247/255, alpha: 1)
         v.clipsToBounds = true
         return v
-
+        
     }()
-
+    
     private lazy var separatorView: UIView = {
         let v = UIView()
         v.translatesAutoresizingMaskIntoConstraints = false
@@ -86,25 +84,29 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     private lazy var editButton: UIButton = {
         let button = UIButton()
-       button.translatesAutoresizingMaskIntoConstraints = false
-       button.setTitle("Log in", for: .normal)
-       button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .systemBlue
-       button.layer.cornerRadius = 20.0
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Log in", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .systemBlue
+        button.layer.cornerRadius = 20.0
         button.addTarget (self, action: #selector(pressed), for: .touchUpInside)
-       button.layer.shadowColor = UIColor.black.cgColor
-    button.layer.shadowOffset = CGSize(width: 4, height: 4)
-       button.layer.shadowOpacity = 0.7
+        button.layer.shadowColor = UIColor.black.cgColor
+        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4.0
-       return button
+        return button
     }()
     var curentUserInit: UserService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-// self.curentUserInit = CurrentUserService()
-
+        
+        //        self.curentUserInit = CurrentUserService()
+#if DEBUG
+        curentUserInit = TestUserService(testUser: User(login: "000", fullName: "Test User", avatar: UIImage(named: "2")!, status: "Testing status"))
+#else
+        curentUserInit = CurrentUserService(user: User(login: "tanya8", fullName: "Dibirova Tanya", avatar: UIImage(named: "14")!, status: "Happiness is a state of activity"))
+#endif
         view.backgroundColor = .white
         
         setupView()
@@ -112,34 +114,23 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         setupConstrains()
         navigationController?.navigationBar.isHidden = true
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupKeyboardObservers()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeKeyboardObservers()
         
     }
     
+    // MARK: - Actions
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-          super.viewWillAppear(animated)
-        
-        #if DEBUG
-        curentUserInit = TestUserService().testUser
-        #else
-        curentUserInit = CurrentUserService().user
-        #endif
-        
-        view.backgroundColor = .white
-        
-          setupKeyboardObservers()
-      }
-      
-      override func viewWillDisappear(_ animated: Bool) {
-          super.viewWillDisappear(animated)
-          
-          removeKeyboardObservers()
-    
-      }
-      
-      // MARK: - Actions
-      
     @objc func willShowKeyboard(_ notification: NSNotification) {
         if scollView.contentInset.bottom == 0.0 {
             let keyboardHeight = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.height
@@ -150,7 +141,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     
     @objc func willHideKeyboard(_ notification: NSNotification) {
         scollView.contentInset.bottom = 0.0
-      
+        
     }
     
     private func setupView() {
@@ -158,156 +149,146 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         navigationItem.title = "ScrollView examle"
         navigationController?.navigationBar.prefersLargeTitles = false
     }
- 
     
     
-    private func addSubviews() {
-            imageView.image = logo
-            
-            containerView.addArrangedSubview(textField)
-            containerView.addArrangedSubview(separatorView)
-            containerView.addArrangedSubview(passField)
-            separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
-            textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
-            passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
-         
-            // setupConstrainsForContainerView()
-            contentView.addSubview(imageView)
-            contentView.addSubview(containerView)
-            contentView.addSubview(editButton)
-            scollView.addSubview(contentView)
-            view.addSubview(scollView)
-        }
-    
-    /*
     private func addSubviews() {
         imageView.image = logo
         
-        containerView.addArrangedSubview(self.textField)
+        containerView.addArrangedSubview(textField)
         containerView.addArrangedSubview(separatorView)
-        containerView.addArrangedSubview(self.passField)
+        containerView.addArrangedSubview(passField)
         separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
         textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
         passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
-            
-     // setupConstrainsForContainerView()
         
-        
-        view.addSubview(imageView)
-
-        view.addSubview(containerView)
-    
-       view.addSubview(scollView)
-       scollView.addSubview(contentView)
-        view.addSubview(editButton)
-        
+        // setupConstrainsForContainerView()
+        contentView.addSubview(imageView)
+        contentView.addSubview(containerView)
+        contentView.addSubview(editButton)
+        scollView.addSubview(contentView)
+        view.addSubview(scollView)
     }
-    */
     
-
+    /*
+     private func addSubviews() {
+     imageView.image = logo
+     
+     containerView.addArrangedSubview(self.textField)
+     containerView.addArrangedSubview(separatorView)
+     containerView.addArrangedSubview(self.passField)
+     separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+     textField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
+     passField.heightAnchor.constraint(equalToConstant: 49.5).isActive = true
+     
+     // setupConstrainsForContainerView()
+     
+     
+     view.addSubview(imageView)
+     
+     view.addSubview(containerView)
+     
+     view.addSubview(scollView)
+     scollView.addSubview(contentView)
+     view.addSubview(editButton)
+     
+     }
+     */
+    
     private func setupConstrains() {
-     //   let safeAreaGuide = view.safeAreaLayoutGuide
+        //   let safeAreaGuide = view.safeAreaLayoutGuide
         
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo:contentView.topAnchor,constant: 120),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.heightAnchor.constraint(equalToConstant: 100),
             imageView.widthAnchor.constraint(equalToConstant: 100),
-           
-        
-    
-    
-    
+            
             containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 120),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             containerView.heightAnchor.constraint(equalToConstant: 100),
             
-        scollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        scollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        scollView.topAnchor.constraint(equalTo: view.topAnchor),
-        scollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
+            scollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scollView.topAnchor.constraint(equalTo: view.topAnchor),
+            scollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
             editButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
             editButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -16),
             editButton.topAnchor.constraint(equalTo: containerView.bottomAnchor,constant: 16),
             editButton.heightAnchor.constraint(equalToConstant: 50),
             editButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-
+            
             contentView.leadingAnchor.constraint(equalTo: scollView.leadingAnchor),
             contentView.widthAnchor.constraint(equalTo: scollView.widthAnchor),
             contentView.trailingAnchor.constraint(equalTo: scollView.trailingAnchor),
             contentView.topAnchor.constraint(equalTo: scollView.topAnchor),
             contentView.bottomAnchor.constraint(equalTo: scollView.bottomAnchor)
         ])
-
+        
     }
     
-  
+    
     private func setupKeyboardObservers() {
-            let notificationCenter = NotificationCenter.default
-            
-            notificationCenter.addObserver(
-                self,
-                selector: #selector(self.willShowKeyboard(_:)),
-                name: UIResponder.keyboardWillShowNotification,
-                object: nil
-            )
-            
-            notificationCenter.addObserver(
-                self,
-                selector: #selector(self.willHideKeyboard(_:)),
-                name: UIResponder.keyboardWillHideNotification,
-                object: nil
-            )
+        let notificationCenter = NotificationCenter.default
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.willShowKeyboard(_:)),
+            name: UIResponder.keyboardWillShowNotification,
+            object: nil
+        )
+        
+        notificationCenter.addObserver(
+            self,
+            selector: #selector(self.willHideKeyboard(_:)),
+            name: UIResponder.keyboardWillHideNotification,
+            object: nil
+        )
     }
-
-    @objc func pressed() {
     
-
-        guard let pass = textField.text else {return}
-        guard  let user = curentUserInit?.userService(login: pass) else {
+    @objc func pressed() {
+        
+        guard let login = textField.text else {return}
+        if let user = curentUserInit?.userService(login: login) {
+            
+            let profileView = ProfileViewController(user: user)
+            self.navigationController?.pushViewController(profileView, animated: true)
+            print("OLA USER ")
+        } else {
             
             print("user not found in login vc")
             let aleart = UIAlertController(title: "Login Wrong", message: "You entered wrong login. Please change it", preferredStyle: .alert)
-                    let action  = UIAlertAction(title: "Change", style: .destructive)
-                    aleart.addAction(action)
+            let action  = UIAlertAction(title: "Change", style: .destructive)
+            aleart.addAction(action)
             present(aleart, animated: true)
-            return
         }
- 
-        if user != nil {
-            let profileView = ProfileViewController(user: user)
- self.navigationController?.pushViewController(profileView, animated: true)
-            print("OLA USER ")
-        }
-
-  }
-
- private func removeKeyboardObservers() {
-     let notificationCenter = NotificationCenter.default
-     notificationCenter.removeObserver(self)
- }
-
- 
- func textFieldShouldReturn(
-     _ textField: UITextField
- ) -> Bool {
-     textField.resignFirstResponder()
-     
-     return true
- }
-
+    }
+    
+    private func removeKeyboardObservers() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.removeObserver(self)
+    }
+    
+    
+    func textFieldShouldReturn(
+        _ textField: UITextField
+    ) -> Bool {
+        textField.resignFirstResponder()
+        
+        return true
+    }
+    
 }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destination.
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 
