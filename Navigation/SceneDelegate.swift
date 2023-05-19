@@ -4,14 +4,52 @@
 //
 //  Created by MacBook on 03.02.2023.
 //
-
+//
 import UIKit
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+    
     var window: UIWindow?
 
 
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let scene = (scene as? UIWindowScene) else { return }
+        
+        let window = UIWindow(windowScene: scene)
+        window.backgroundColor = .gray
+        
+        let firstVC = LogInViewController()
+        let factory = MyLoginFactory()
+        firstVC.loginDelegate = factory.makeLoginInspector()
+      //  firstVC.loginDelegate = LoginInspector()
+       // firstVC.view.backgroundColor = .gray
+       
+        let secondVC = FeedViewController()
+//        let secondVC = ProfileViewController(user: user)
+        secondVC.title = "Профиль"
+        
+    
+        secondVC.tabBarItem = UITabBarItem(tabBarSystemItem: .bookmarks, tag: 1)
+
+        let thirdVC = PostViewController()
+    
+        thirdVC.title = "Мой пост"
+        thirdVC.view.backgroundColor = .blue
+    
+    
+        let firstNavController = UINavigationController (rootViewController: firstVC)
+        let secondNavController = UINavigationController(rootViewController: secondVC)
+        
+        let tabBarVC = UITabBarController()
+        tabBarVC.setViewControllers([firstNavController,secondNavController], animated: true)
+        
+        window.rootViewController = tabBarVC
+        window.makeKeyAndVisible()
+        
+        self.window = window
+    }
+}
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
@@ -48,5 +86,5 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
 
-}
+
 
