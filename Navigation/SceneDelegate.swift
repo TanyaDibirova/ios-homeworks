@@ -9,7 +9,7 @@ import UIKit
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-
+    
     var window: UIWindow?
 
 
@@ -20,6 +20,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.backgroundColor = .gray
         
         let firstVC = LogInViewController()
+        let factory = MyLoginFactory()
+        firstVC.loginDelegate = factory.makeLoginInspector()
+      //  firstVC.loginDelegate = LoginInspector()
        // firstVC.view.backgroundColor = .gray
        
         let secondVC = FeedViewController()

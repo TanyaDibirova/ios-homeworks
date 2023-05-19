@@ -3,6 +3,8 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
+    var loginDelegate: LoginViewControllerDelegate?
+    
     private lazy var scollView: UIScrollView = {
         let scrollVieww = UIScrollView()
         
@@ -103,7 +105,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         //        self.curentUserInit = CurrentUserService()
 #if DEBUG
-        curentUserInit = TestUserService(testUser: User(login: "000", fullName: "Test User", avatar: UIImage(named: "2")!, status: "Testing status"))
+        curentUserInit = TestUserService(testUser: User(login: "dibirova", fullName: "Test User", avatar: UIImage(named: "2")!, status: "Testing status"))
 #else
         curentUserInit = CurrentUserService(user: User(login: "tanya8", fullName: "Dibirova Tanya", avatar: UIImage(named: "14")!, status: "Happiness is a state of activity"))
 #endif
@@ -250,7 +252,17 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     @objc func pressed() {
         
         guard let login = textField.text else {return}
-        if let user = curentUserInit?.userService(login: login) {
+        guard let pass = passField.text else {return}
+        guard let deleg = loginDelegate else {return}
+        
+        if deleg.check(login: login, password: pass) {
+            guard let user = curentUserInit?.userService(login: login) else {
+                print("User not found")
+                return
+            }
+            print(deleg.check(login: login, password: pass))
+       // guard let login = textField.text else {return}
+      //  if let user = curentUserInit?.userService(login: login) {
             
             let profileView = ProfileViewController(user: user)
             self.navigationController?.pushViewController(profileView, animated: true)
@@ -278,7 +290,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
+}
+
+extension LogInViewController: LoginViewControllerDelegate {
+    func check(login: String, password: String) -> Bool {
+        return ((loginDelegate?.check(login: login, password: password)) != nil)
+    }
+
 }
 
 /*
