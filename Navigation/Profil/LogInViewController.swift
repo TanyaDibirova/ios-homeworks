@@ -35,6 +35,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         text.leftViewMode = .always
         text.leftView = spacerView
         text.placeholder = "Email of phone"
+        text.text = "dibirova"
         text.font = UIFont.systemFont(ofSize: 16)
         text.autocorrectionType = UITextAutocorrectionType.no
         text.returnKeyType = UIReturnKeyType.done
@@ -52,6 +53,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passTF.leftViewMode = .always
         passTF.leftView = spacerView
         passTF.placeholder = "Password"
+        passTF.text = "8888"
         passTF.font = UIFont.systemFont(ofSize: 16)
         passTF.autocorrectionType = UITextAutocorrectionType.no
         passTF.returnKeyType = UIReturnKeyType.done

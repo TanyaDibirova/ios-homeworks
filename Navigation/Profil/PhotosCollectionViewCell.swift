@@ -57,10 +57,10 @@ final class PhotosCollectionViewCell: UICollectionViewCell {
     
     }
     
-    func setup(
-        with fhotos: Fhotos
-    ){
-        phtosImageView.image = UIImage(named: fhotos.imageName)
+    func setup
+    (with fhotos: UIImage)
+    {
+        phtosImageView.image = fhotos
     }
     
     }
