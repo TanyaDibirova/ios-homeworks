@@ -13,6 +13,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return scrollVieww
     }()
     
+    
+    
     private lazy var contentView: UIView = {
         let contentVieww = UIView()
         
@@ -86,18 +88,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return v
     }()
     
-    private lazy var editButton: UIButton = {
-        let button = UIButton()
+    private lazy var editButton: CustomButton = {
+        let button = CustomButton(title: "Log in")
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .systemBlue
-        button.layer.cornerRadius = 20.0
-        button.addTarget (self, action: #selector(pressed), for: .touchUpInside)
+        button.buttonTapped = { [weak self] in self?.pressed()
+        }
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
-        button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4.0
         return button
     }()
     var curentUserInit: UserService?

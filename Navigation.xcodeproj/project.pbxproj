@@ -32,6 +32,8 @@
 		FA64CDF629DE0F420020490A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E2C298D3D92005E6FDF /* PostViewController.swift */; };
 		FA64CDF729DEDC950020490A /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA487E2C298D3D92005E6FDF /* PostViewController.swift */; };
 		FA64CDF829DEDCB00020490A /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA11B229A8F63400A9A5E9 /* Post.swift */; };
+		FAA7242F2A3C1A05003F1994 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA7242E2A3C1A05003F1994 /* CustomButton.swift */; };
+		FAC6D6C12A41FF8600343275 /* FeedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC6D6C02A41FF8600343275 /* FeedModel.swift */; };
 		FAD892D329F64F760001152D /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD892D229F64F760001152D /* User.swift */; };
 		FAFA11B529AB3D9000A9A5E9 /* UITableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA11B429AB3D9000A9A5E9 /* UITableView.swift */; };
 		FAFA11B929B7E50300A9A5E9 /* Fhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAFA11B829B7E50300A9A5E9 /* Fhotos.swift */; };
@@ -101,6 +103,8 @@
 		FA64CDD729DDC4680020490A /* StorageService.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = StorageService.docc; sourceTree = "<group>"; };
 		FA64CDDD29DDC4680020490A /* StorageServiceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StorageServiceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA64CDE429DDC4680020490A /* StorageServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageServiceTests.swift; sourceTree = "<group>"; };
+		FAA7242E2A3C1A05003F1994 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		FAC6D6C02A41FF8600343275 /* FeedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedModel.swift; sourceTree = "<group>"; };
 		FAD892D229F64F760001152D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FAFA11B229A8F63400A9A5E9 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		FAFA11B429AB3D9000A9A5E9 /* UITableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableView.swift; sourceTree = "<group>"; };
@@ -160,6 +164,7 @@
 		FA487E15298D0CD0005E6FDF /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				FAC6D6BF2A41FF6D00343275 /* FeedModel */,
 				FA487E36298DB47D005E6FDF /* Profil */,
 				FA487E16298D0CD0005E6FDF /* AppDelegate.swift */,
 				FA487E18298D0CD0005E6FDF /* SceneDelegate.swift */,
@@ -190,6 +195,7 @@
 				FA365A2229B946E20096146A /* PhotosTableViewCell.swift */,
 				FA365A2429BCC65B0096146A /* PhotosCollectionViewCell.swift */,
 				FAD892D229F64F760001152D /* User.swift */,
+				FAA7242E2A3C1A05003F1994 /* CustomButton.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -210,6 +216,14 @@
 				FA64CDE429DDC4680020490A /* StorageServiceTests.swift */,
 			);
 			path = StorageServiceTests;
+			sourceTree = "<group>";
+		};
+		FAC6D6BF2A41FF6D00343275 /* FeedModel */ = {
+			isa = PBXGroup;
+			children = (
+				FAC6D6C02A41FF8600343275 /* FeedModel.swift */,
+			);
+			path = FeedModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +379,8 @@
 				FA487E1B298D0CD0005E6FDF /* ViewController.swift in Sources */,
 				FA64CDF329DE0D640020490A /* PostTableViewCell.swift in Sources */,
 				FA64CDF729DEDC950020490A /* PostViewController.swift in Sources */,
+				FAC6D6C12A41FF8600343275 /* FeedModel.swift in Sources */,
+				FAA7242F2A3C1A05003F1994 /* CustomButton.swift in Sources */,
 				FA487E17298D0CD0005E6FDF /* AppDelegate.swift in Sources */,
 				FA487E3C299839F0005E6FDF /* LogInViewController.swift in Sources */,
 				FA487E2B298D3D0E005E6FDF /* FeedViewController.swift in Sources */,
