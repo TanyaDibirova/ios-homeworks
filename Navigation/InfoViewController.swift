@@ -9,24 +9,20 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    let alertButton: UIButton = {
-        let b = UIButton(type: .system)
-        b.translatesAutoresizingMaskIntoConstraints = false
-        b.setTitle("Показать алерт", for: .normal)
-        return b
+    private lazy var alertButton: CustomButton = {
+        let button = CustomButton(title: "Показать алерт", action: showAlert)
+        return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .cyan
-        alertButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
         view.addSubview(alertButton)
         alertButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         alertButton.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     }
     
-    @objc private func showAlert() {
+     private func showAlert() {
         let alertVC = UIAlertController(title: "Это алерт контроллер", message: "Это сообщение", preferredStyle: .alert)
         present(alertVC, animated: true)
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)

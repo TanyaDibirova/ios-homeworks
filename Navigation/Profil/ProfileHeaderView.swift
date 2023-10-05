@@ -3,6 +3,7 @@ import UIKit
 class ProfileHeaderView: UIView {
     
     private var originFrame: CGRect = .zero
+    private var widthcCon: NSLayoutConstraint!
     
     lazy var someView: UIView = {
         let v = UIView()
@@ -32,8 +33,8 @@ class ProfileHeaderView: UIView {
         image.addGestureRecognizer(tapImage)
         return image
     }()
-    let cat = UIImage(named: "cat")
-    var widthcCon: NSLayoutConstraint!
+ //   let cat = UIImage(named: "cat")
+    
      var catLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -55,32 +56,17 @@ class ProfileHeaderView: UIView {
 
 
     private lazy var editButton: UIButton = {
-        let button = UIButton()
-       button.translatesAutoresizingMaskIntoConstraints = false
-       button.setTitle("Status", for: .normal)
-       button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .systemBlue
-       button.layer.cornerRadius = 20.0
-        button.addTarget (self, action: #selector(pressed), for: .touchUpInside)
-       button.layer.shadowColor = UIColor.black.cgColor
-    button.layer.shadowOffset = CGSize(width: 4, height: 4)
-       button.layer.shadowOpacity = 0.7
-        button.layer.shadowRadius = 4.0
+        let button = CustomButton(title: "Status", action: pressed)
        return button
     }()
-
-    
     
     convenience init(title: String) {
         self.init(frame: .zero)
-        
         catLabel.text = title
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-    
         self.setupSelf()
     }
     
@@ -91,7 +77,7 @@ class ProfileHeaderView: UIView {
     
     
     private func setupSelf() {
-        maImageView.image = cat
+        maImageView.image = UIImage(named: "cat")
         maImageView.isUserInteractionEnabled = true
 
         widthcCon = self.maImageView.widthAnchor.constraint(equalToConstant: 100)
@@ -160,7 +146,7 @@ class ProfileHeaderView: UIView {
         }
     }
     
-    func addSomeView() {
+   private func addSomeView() {
         someView.alpha = 0
         someView.frame = CGRect(x: maImageView.frame.origin.x,
                                 y: maImageView.frame.origin.y + maImageView.frame.height + 40,
@@ -168,15 +154,10 @@ class ProfileHeaderView: UIView {
                                 height: 50)
         addSubview(someView)
     }
-    
-    func setupView(user: User?) {
-            maImageView.image = user?.avatar
-            catLabel.text = user?.fullName
-            waitingLabel.text = user?.status
-        }
+   
     
     
-    func addSomeButton() {
+   private func addSomeButton() {
         someButton.alpha = 0
         someButton.frame = CGRect(x: superview!.frame.width - 80,
                                   y: 80,
@@ -185,8 +166,14 @@ class ProfileHeaderView: UIView {
         addSubview(someButton)
     }
     
-    @objc func pressed() {
+    private func pressed() {
         print("Waiting for something...")
+    }
+    
+    func setupView(user: User?) {
+        maImageView.image = user?.avatar
+        catLabel.text = user?.fullName
+        waitingLabel.text = user?.status
     }
     
     @objc private func didTapImage() {
@@ -216,8 +203,8 @@ class ProfileHeaderView: UIView {
         
     }
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
-    }
+//    override func awakeFromNib() {
+//        super.awakeFromNib()
+//    }
 }
 

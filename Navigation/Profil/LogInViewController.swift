@@ -3,6 +3,8 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
     
+    private let logo  = UIImage(named: "logo")
+    private var curentUserInit: UserService?
     var loginDelegate: LoginViewControllerDelegate?
     
     private lazy var scollView: UIScrollView = {
@@ -28,7 +30,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         logo.translatesAutoresizingMaskIntoConstraints = false
         return logo
     }()
-    let logo  = UIImage(named: "logo")
     
     private lazy var textField: UITextField = { [unowned self] in
         let text = UITextField()
@@ -89,19 +90,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     }()
     
     private lazy var editButton: CustomButton = {
-        let button = CustomButton(title: "Log in")
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Log in", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = .systemBlue
-        button.buttonTapped = { [weak self] in self?.pressed()
-        }
-        button.layer.shadowColor = UIColor.black.cgColor
-        button.layer.shadowOffset = CGSize(width: 4, height: 4)
+        let button = CustomButton(title: "Log in", action: pressed)
         return button
     }()
-    var curentUserInit: UserService?
-    
+                                  
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -10,6 +10,7 @@ import StorageService
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
 
+    private var user: User?
     fileprivate let menu = Menu.make()
     let headerView = ProfileHeaderView()
     private lazy var tableView: UITableView = {
@@ -34,8 +35,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     ) -> Int {
         menu.count
     }
-    
-    private var user: User?
     
     init(user: User) {
  
